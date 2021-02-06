@@ -19,8 +19,3 @@ app.listen(PORT, () => {
   console.log("Listening on port... 5000");
 });
 
-// M E R N
-// MONGODB
-// E EXPRESS (ROUTAGE)            GOOGLE.COM/                GOOGLE.COM/IMAGES
-// R REACT
-// N NODE JS

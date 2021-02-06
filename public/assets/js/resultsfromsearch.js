@@ -15,8 +15,8 @@ const hostnameRegexp = new RegExp("^https?://.+?/");
 const countries = {
   address: {
     // Initial coordinates of the map
-    center: { lat: 40.7128, lng: -74.006 },
-    zoom: 12,
+    center: { lat: 45.5017, lng: -73.5673 },
+    zoom: 10,
   },
 };
 
@@ -25,15 +25,78 @@ function initMap() {
   map = new google.maps.Map(document.getElementById("map"), {
     zoom: countries["address"].zoom,
     center: countries["address"].center,
-    mapTypeControl: false,
-    panControl: false,
-    zoomControl: false,
+    mapTypeControl: true,
+    panControl: true,
+    zoomControl: true,
     streetViewControl: false,
     styles: mapstyling,
   });
 
-  const icons = "https://i.ibb.co/wL4prx4/delete.png";
+  function convertToArrayOfLatLng(myArray) {
+    let newArray = [];
+    for (j = 0; j < myArray.length; j++) {
+      let latVal = myArray[j][1];
+      let lngVal = myArray[j][0];
+      newArray.push({ lat: latVal, lng: lngVal });
+    }
+    return newArray;
+  }
+
+  var arrayLatLngObjs = [];
+  for (i = 0; i < orduremenagere.features.length; i++) {
+    let type = orduremenagere.features[i].geometry.type;
+    if (type == "MultiPolygon") {
+      for (
+        j = 0;
+        j < orduremenagere.features[i].geometry.coordinates[0].length;
+        j++
+      ) {
+        arrayLatLngObjs.push([
+          convertToArrayOfLatLng(
+            orduremenagere.features[i].geometry.coordinates[0][j]
+          ),
+          "Helllo" + i + j,
+        ]);
+      }
+    }
+    if (type == "Polygon") {
+      arrayLatLngObjs.push([
+        convertToArrayOfLatLng(
+          orduremenagere.features[i].geometry.coordinates[0]
+        ),
+        "Helllo" + i,
+      ]);
+    }
+  }
+
+  orduremenagerePolygonArray = [];
+  for (i = 0; i < arrayLatLngObjs.length; i++) {
+    var infowindow = new google.maps.InfoWindow({
+      size: new google.maps.Size(150, 50),
+    });
+    let coordinates = arrayLatLngObjs[i][0];
+    const polygon = new google.maps.Polygon({
+      paths: coordinates,
+      strokeColor: "#FF0000",
+      strokeOpacity: 0.8,
+      strokeWeight: 2,
+      fillColor: "#FF0000",
+      fillOpacity: 0.35,
+      clickable: true,
+    });
+    let message = arrayLatLngObjs[i][1];
+    google.maps.event.addListener(polygon, "click", function (event) {
+      infowindow.setContent(message);
+    });
+
+    polygon.setMap(map);
+    orduremenagerePolygonArray.push(polygon);
+  }
+
+  //Find Garbage NYC
   // For loop of all recycling bins
+  const icons = "https://i.ibb.co/wL4prx4/delete.png";
+
   for (i = 0; i < recyclingbin.length; i++) {
     latVal = recyclingbin[i].Latitude;
     lngVal = recyclingbin[i].Longitude;
@@ -45,12 +108,9 @@ function initMap() {
       clickable: true,
       icon: icons,
     });
-  }
 
-  searchMarker = new google.maps.Marker({
-    position: { lat: 40.85557, lng: -73.887565 },
-    map,
-    title: "Recycle Bin #1",
-    clickable: true,
-  });
+    // Add feature to say that garbage is full
+
+    // Add localizing feature
+  }
 }
