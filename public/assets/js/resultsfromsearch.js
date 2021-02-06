@@ -15,7 +15,7 @@ const hostnameRegexp = new RegExp("^https?://.+?/");
 const countries = {
   address: {
     // Initial coordinates of the map
-    center: { lat: 45.52, lng: -73.7 },
+    center: { lat: 45.59, lng: -73.7 },
     zoom: 11,
   },
 };
@@ -115,6 +115,7 @@ function initMap() {
       function () {
         this.setOptions({ fillColor: "#FF0000" });
         document.getElementById("borough-container").innerText = "";
+        document.getElementById("info-collect-container").innerText = "";
       }
     );
 
