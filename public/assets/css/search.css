@@ -37,7 +37,7 @@ table {
 }
 
 #map {
-  width: 100vw;
+  width: 80vw;
 }
 
 #street-view {
@@ -120,4 +120,41 @@ table {
 .address-text {
   font-size: 2em;
   text-align: center;
+}
+
+#borough-container {
+  background: #000000;
+  position: absolute;
+  z-index: 99;
+  width: 20%;
+  top: 0;
+  height: 400px;
+  opacity: 0.9;
+  filter: alpha(opacity=90);
+  color: #ffffff;
+  height: 10%;
+  top: 5%;
+  left: 40%;
+  text-align: center;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+#info-collect-container {
+  background: #000000;
+  position: absolute;
+  z-index: 99;
+  width: 20%;
+  top: 0;
+  opacity: 0.9;
+  filter: alpha(opacity=90);
+  color: #ffffff;
+  height: 100vh;
+  top: 0%;
+  left: 80%;
+  text-align: center;
+  display: flex;
+  justify-content: center;
+  align-items: center;
 }

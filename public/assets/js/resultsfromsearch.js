@@ -15,8 +15,8 @@ const hostnameRegexp = new RegExp("^https?://.+?/");
 const countries = {
   address: {
     // Initial coordinates of the map
-    center: { lat: 45.5017, lng: -73.5673 },
-    zoom: 10,
+    center: { lat: 45.52, lng: -73.7 },
+    zoom: 11,
   },
 };
 
@@ -55,7 +55,8 @@ function initMap() {
           convertToArrayOfLatLng(
             orduremenagere.features[i].geometry.coordinates[0][j]
           ),
-          "Helllo" + i + j,
+          orduremenagere.features[i].properties.SECTEUR,
+          orduremenagere.features[i].properties.MESSAGE_FR,
         ]);
       }
     }
@@ -64,18 +65,19 @@ function initMap() {
         convertToArrayOfLatLng(
           orduremenagere.features[i].geometry.coordinates[0]
         ),
-        "Helllo" + i,
+        orduremenagere.features[i].properties.SECTEUR,
+        orduremenagere.features[i].properties.MESSAGE_FR,
       ]);
     }
   }
 
+  var infowindow = new google.maps.InfoWindow({
+    size: new google.maps.Size(150, 50),
+  });
   orduremenagerePolygonArray = [];
   for (i = 0; i < arrayLatLngObjs.length; i++) {
-    var infowindow = new google.maps.InfoWindow({
-      size: new google.maps.Size(150, 50),
-    });
-    let coordinates = arrayLatLngObjs[i][0];
-    const polygon = new google.maps.Polygon({
+    var coordinates = arrayLatLngObjs[i][0];
+    orduremenagerePolygonArray[i] = new google.maps.Polygon({
       paths: coordinates,
       strokeColor: "#FF0000",
       strokeOpacity: 0.8,
@@ -83,14 +85,53 @@ function initMap() {
       fillColor: "#FF0000",
       fillOpacity: 0.35,
       clickable: true,
+      name: boroughDict[arrayLatLngObjs[i][1]],
+      msgFR: arrayLatLngObjs[i][2],
     });
-    let message = arrayLatLngObjs[i][1];
-    google.maps.event.addListener(polygon, "click", function (event) {
-      infowindow.setContent(message);
+    google.maps.event.addListener(map, "click", function () {
+      infowindow.close();
     });
 
-    polygon.setMap(map);
-    orduremenagerePolygonArray.push(polygon);
+    message = arrayLatLngObjs[i][1];
+    orduremenagerePolygonArray[i].infoWindow = new google.maps.InfoWindow({
+      size: new google.maps.Size(150, 50),
+    });
+
+    google.maps.event.addListener(
+      orduremenagerePolygonArray[i],
+      "mouseover",
+      function () {
+        this.setOptions({ fillColor: "#00FF00" });
+        document.getElementById("borough-container").innerText = this.name;
+        document.getElementById(
+          "info-collect-container"
+        ).innerText = this.msgFR;
+      }
+    );
+
+    google.maps.event.addListener(
+      orduremenagerePolygonArray[i],
+      "mouseout",
+      function () {
+        this.setOptions({ fillColor: "#FF0000" });
+        document.getElementById("borough-container").innerText = "";
+      }
+    );
+
+    google.maps.event.addListener(
+      orduremenagerePolygonArray[i],
+      "click",
+      function (event) {
+        infowindow.setContent(message);
+        if (event) {
+          point = event.latLng;
+        }
+        infowindow.setPosition(point);
+        infowindow.open(map);
+      }
+    );
+
+    orduremenagerePolygonArray[i].setMap(map);
   }
 
   //Find Garbage NYC
