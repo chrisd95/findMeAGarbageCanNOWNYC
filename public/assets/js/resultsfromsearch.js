@@ -25,8 +25,8 @@ function initMap() {
   map = new google.maps.Map(document.getElementById("map"), {
     zoom: countries["address"].zoom,
     center: countries["address"].center,
-    mapTypeControl: true,
-    panControl: true,
+    mapTypeControl: false,
+    panControl: false,
     zoomControl: true,
     streetViewControl: false,
     styles: mapstyling,
@@ -85,7 +85,7 @@ function initMap() {
       fillColor: "#FF0000",
       fillOpacity: 0.35,
       clickable: true,
-      name: boroughDict[arrayLatLngObjs[i][1]],
+      name: boroughDict[arrayLatLngObjs[i][1]].quartier,
       msgFR: arrayLatLngObjs[i][2],
     });
     google.maps.event.addListener(map, "click", function () {
