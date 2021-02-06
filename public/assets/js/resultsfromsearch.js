@@ -32,17 +32,18 @@ function initMap() {
     styles: mapstyling,
   });
 
+  const icons = "https://i.ibb.co/wL4prx4/delete.png";
   // For loop of all recycling bins
   for (i = 0; i < recyclingbin.length; i++) {
     latVal = recyclingbin[i].Latitude;
     lngVal = recyclingbin[i].Longitude;
     latlng = { lat: latVal, lng: lngVal };
-    console.log(latlng);
     new google.maps.Marker({
       position: latlng,
       map,
       title: "Recycle Bin #" + i,
       clickable: true,
+      icon: icons,
     });
   }
 
