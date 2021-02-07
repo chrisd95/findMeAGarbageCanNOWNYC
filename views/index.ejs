@@ -15,9 +15,10 @@
     ></script>
     <script src="https://cdn.klokantech.com/maptilerlayer/v1/index.js"></script>
     <script type="text/javascript" src="assets/json/mapstyling.json"></script>
-    <script type="text/javascript" src="assets/json/recyclingbin.json"></script>
     <script type="text/javascript" src="assets/json/boroughDict.json"></script>
     <script type="text/javascript" src="assets/json/recyclage.json"></script>
+    <script type="text/javascript" src="assets/json/compost.json"></script>
+
     <script
       type="text/javascript"
       src="assets/json/orduremenagere.json"
@@ -92,22 +93,32 @@
       <div id="borough-container"></div>
       <div id="borough-container-right"></div>
       <div id="info-collect-container"></div>
+
       <div id="garbage-picker">
-        <img
-          style="width: 30px"
-          src="https://i.ibb.co/FsggCN7/recycle-bin.png"
-          alt="cant see"
-        />
-        <img
-          style="width: 30px"
-          src="https://i.ibb.co/xHF6npG/recycle-sign.png"
-          alt="cant see"
-        />
-        <img
-          style="width: 30px"
-          src="https://i.ibb.co/cLW2D9y/bone.png"
-          alt="cant see"
-        />
+        <div id="garbage">
+          <img
+            id="garbage-img"
+            style="width: 30px"
+            src="https://i.ibb.co/FsggCN7/recycle-bin.png"
+            alt="cant see"
+          />
+        </div>
+        <div id="recycling">
+          <img
+            id="recycling-img"
+            style="width: 30px"
+            src="https://i.ibb.co/xHF6npG/recycle-sign.png"
+            alt="cant see"
+          />
+        </div>
+        <div id="compost">
+          <img
+            id="compost-img"
+            style="width: 30px"
+            src="https://i.ibb.co/cLW2D9y/bone.png"
+            alt="cant see"
+          />
+        </div>
       </div>
     </results-container>
   </body>

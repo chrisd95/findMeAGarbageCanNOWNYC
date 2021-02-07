@@ -6,10 +6,27 @@ let autocomplete;
 let placeTwo;
 let searchImage;
 const countryRestrict = { country: "us" };
+let garbageOptions = ["garbage-img", "recycling-img", "compost-img"];
+let currentGarbageType = garbageOptions[0];
+document.getElementById(currentGarbageType).style.opacity = 1;
+var dataObjPolygonArray = [];
 
+for (let i = 0; i < garbageOptions.length; i++) {
+  document
+    .getElementById(garbageOptions[i])
+    .addEventListener("click", function () {
+      clearGarbage();
+      document.getElementById(garbageOptions[i]).style.opacity = 1;
+    });
+}
+
+function clearGarbage() {
+  for (let i = 0; i < garbageOptions.length; i++) {
+    document.getElementById(garbageOptions[i]).style.opacity = 0.2;
+  }
+}
 // close X-button
 document.getElementById("close-button").addEventListener("click", function () {
-  console.log("closing");
   document.getElementById("on-load-message").style.display = "none";
   map.setZoom(12);
 });
@@ -22,6 +39,7 @@ const countries = {
     zoom: 16,
   },
 };
+
 // Initialize google map API
 function initMap() {
   map = new google.maps.Map(document.getElementById("map"), {
@@ -33,106 +51,153 @@ function initMap() {
     streetViewControl: false,
     styles: mapstyling,
   });
+}
 
-  function convertToArrayOfLatLng(myArray) {
-    let newArray = [];
-    for (j = 0; j < myArray.length; j++) {
-      let latVal = myArray[j][1];
-      let lngVal = myArray[j][0];
-      newArray.push({ lat: latVal, lng: lngVal });
+let garbageImageArray = [
+  '<img id="garbage-img" style="width:30px" src="https://i.ibb.co/FsggCN7/recycle-bin.png" alt="cant see"/>',
+  '<img id="garbage-img" style="width:30px" src="https://i.ibb.co/xHF6npG/recycle-sign.png" alt="cant see"/>',
+  '<img id="garbage-img" style="width:30px" src="https://i.ibb.co/cLW2D9y/bone.png" alt="cant see"/>',
+];
+
+let garbageColorArray = [
+  ["#FF0000", "#00FF00"],
+  ["#FF0000", "#00FF00"],
+  ["#FF0000", "#00FF00"],
+];
+let stateOrdure = 0;
+document
+  .getElementById(garbageOptions[0])
+  .addEventListener("click", function () {
+    if (stateOrdure == 0) {
+      for (let i = 0; i < dataObjPolygonArray.length; i++) {
+        dataObjPolygonArray[i].setMap(null);
+      }
+      createPolygons(
+        orduremenagere,
+        garbageColorArray[0][0],
+        garbageColorArray[0][1],
+        garbageImageArray[0]
+      );
+      stateOrdure = 1;
+      stateRecyclage = 0;
+      stateCompost = 0;
     }
-    return newArray;
-  }
+  });
 
+let stateRecyclage = 0;
+document
+  .getElementById(garbageOptions[1])
+  .addEventListener("click", function () {
+    if (stateRecyclage == 0) {
+      for (let i = 0; i < dataObjPolygonArray.length; i++) {
+        dataObjPolygonArray[i].setMap(null);
+      }
+      createPolygons(
+        recyclage,
+        garbageColorArray[1][0],
+        garbageColorArray[1][1],
+        garbageImageArray[1]
+      );
+      stateOrdure = 0;
+      stateRecyclage = 1;
+      stateCompost = 0;
+    }
+  });
+
+let stateCompost = 0;
+document
+  .getElementById(garbageOptions[2])
+  .addEventListener("click", function () {
+    if (stateCompost == 0) {
+      for (let i = 0; i < dataObjPolygonArray.length; i++) {
+        dataObjPolygonArray[i].setMap(null);
+      }
+      createPolygons(
+        compost,
+        garbageColorArray[2][0],
+        garbageColorArray[2][1],
+        garbageImageArray[2]
+      );
+      stateOrdure = 0;
+      stateRecyclage = 0;
+      stateCompost = 1;
+    }
+  });
+
+function convertToArrayOfLatLng(myArray) {
+  let newArray = [];
+  for (j = 0; j < myArray.length; j++) {
+    let latVal = myArray[j][1];
+    let lngVal = myArray[j][0];
+    newArray.push({ lat: latVal, lng: lngVal });
+  }
+  return newArray;
+}
+
+function createPolygons(dataObj, color1, color2, garbageImage) {
   var arrayLatLngObjs = [];
-  for (i = 0; i < orduremenagere.features.length; i++) {
-    let type = orduremenagere.features[i].geometry.type;
+  for (i = 0; i < dataObj.features.length; i++) {
+    let type = dataObj.features[i].geometry.type;
     if (type == "MultiPolygon") {
-      for (
-        j = 0;
-        j < orduremenagere.features[i].geometry.coordinates[0].length;
-        j++
-      ) {
+      for (j = 0; j < dataObj.features[i].geometry.coordinates[0].length; j++) {
         arrayLatLngObjs.push([
           convertToArrayOfLatLng(
-            orduremenagere.features[i].geometry.coordinates[0][j]
+            dataObj.features[i].geometry.coordinates[0][j]
           ),
-          orduremenagere.features[i].properties.SECTEUR,
-          orduremenagere.features[i].properties.MESSAGE_EN,
+          dataObj.features[i].properties.SECTEUR,
+          dataObj.features[i].properties.MESSAGE_EN,
         ]);
       }
     }
     if (type == "Polygon") {
       arrayLatLngObjs.push([
-        convertToArrayOfLatLng(
-          orduremenagere.features[i].geometry.coordinates[0]
-        ),
-        orduremenagere.features[i].properties.SECTEUR,
-        orduremenagere.features[i].properties.MESSAGE_EN,
+        convertToArrayOfLatLng(dataObj.features[i].geometry.coordinates[0]),
+        dataObj.features[i].properties.SECTEUR,
+        dataObj.features[i].properties.MESSAGE_EN,
       ]);
     }
   }
 
-  console.log(recyclage);
-
-  var infowindow = new google.maps.InfoWindow({
-    size: new google.maps.Size(150, 50),
-  });
-  orduremenagerePolygonArray = [];
   for (i = 0; i < arrayLatLngObjs.length; i++) {
-    var coordinates = arrayLatLngObjs[i][0];
-    orduremenagerePolygonArray[i] = new google.maps.Polygon({
+    let coordinates = arrayLatLngObjs[i][0];
+    console.log(arrayLatLngObjs[i]);
+    dataObjPolygonArray[i] = new google.maps.Polygon({
       paths: coordinates,
-      strokeColor: "#FF0000",
+      strokeColor: color1,
       strokeOpacity: 0.8,
       strokeWeight: 2,
-      fillColor: "#FF0000",
+      fillColor: color1,
       fillOpacity: 0.35,
       clickable: true,
       name: boroughDict[arrayLatLngObjs[i][1]].quartier,
       zone: boroughDict[arrayLatLngObjs[i][1]].Secteur,
       msgFR: arrayLatLngObjs[i][2],
     });
-    google.maps.event.addListener(map, "click", function () {
-      infowindow.close();
-    });
 
     message = arrayLatLngObjs[i][1];
     google.maps.event.addListener(
-      orduremenagerePolygonArray[i],
+      dataObjPolygonArray[i],
       "mouseover",
       function () {
-        this.setOptions({ fillColor: "#00FF00" });
+        this.setOptions({ fillColor: color2 });
         document.getElementById("borough-container").innerText =
           this.name + this.zone;
-        document.getElementById("info-collect-container").innerText =
-          this.msgFR + this.name + this.zone;
+        document.getElementById("info-collect-container").innerHTML =
+          garbageImage + this.msgFR;
         document.getElementById("borough-container-right").innerText =
           this.name + this.zone;
       }
     );
     google.maps.event.addListener(
-      orduremenagerePolygonArray[i],
+      dataObjPolygonArray[i],
       "mouseout",
       function () {
-        this.setOptions({ fillColor: "#FF0000" });
+        this.setOptions({ fillColor: color1 });
         document.getElementById("borough-container").innerText = "  ";
         document.getElementById("borough-container-right").innerText = "  ";
         document.getElementById("info-collect-container").innerText = "";
       }
     );
-    // google.maps.event.addListener(
-    //   orduremenagerePolygonArray[i],
-    //   "click",
-    //   function (event) {
-    //     infowindow.setContent(message);
-    //     if (event) {
-    //       point = event.latLng;
-    //     }
-    //     infowindow.setPosition(point);
-    //     infowindow.open(map);
-    //   }
-    // );
-    orduremenagerePolygonArray[i].setMap(map);
+    dataObjPolygonArray[i].setMap(map);
   }
 }
