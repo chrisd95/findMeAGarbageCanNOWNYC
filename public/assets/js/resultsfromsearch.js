@@ -36,6 +36,9 @@ function clearGarbage() {
 document.getElementById("close-button").addEventListener("click", function () {
   document.getElementById("on-load-message").style.display = "none";
   map.setZoom(12);
+  setTimeout(() => {
+    document.getElementById("yellow-arrow").style.display = "flex";
+  }, 1000);
 });
 
 // Map is initially centered to North America coordinates

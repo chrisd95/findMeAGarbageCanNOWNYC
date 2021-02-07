@@ -150,6 +150,8 @@ table {
   bottom: 5%;
   left: 5%;
   width: 15%;
+  min-width: 250px;
+  min-height: 50px;
   border-radius: 10px;
   text-align: center;
   display: flex;
@@ -158,30 +160,52 @@ table {
   align-items: center;
 }
 
+#yellow-arrow {
+  background: transparent;
+  position: absolute;
+  z-index: 101;
+  opacity: 0.85;
+  filter: alpha(opacity=90);
+  color: #ffffff;
+  height: 20%;
+  bottom: 12%;
+  left: 5%;
+  width: 10%;
+  min-width: 250px;
+  min-height: 50px;
+  border-radius: 10px;
+  text-align: center;
+  display: flex;
+  flex-direction: column;
+  justify-content: flex-end;
+  align-items: center;
+  display: none;
+}
+
 #garbage {
   /* background-color: yellow; */
-  width: 16%;
+  width: 14%;
 }
 
 #recycling {
   /* background-color: green; */
-  width: 16%;
+  width: 14%;
 }
 
 #compost {
   /* background-color: blue; */
-  width: 16%;
+  width: 14%;
 }
 #organic-waste {
   /* background-color: blue; */
-  width: 16%;
+  width: 14%;
 }
 
 #green-waste {
-  width: 16%;
+  width: 14%;
 }
 #construction-waste {
-  width: 16%;
+  width: 14%;
 }
 #garbage-picker img {
   opacity: 0.2;
