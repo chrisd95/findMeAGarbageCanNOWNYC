@@ -18,7 +18,7 @@ document.getElementById("close-button").addEventListener("click", function () {
 const countries = {
   address: {
     // Initial coordinates of the map
-    center: { lat: 45.5, lng: -73.65 },
+    center: { lat: 45.53, lng: -73.65 },
     zoom: 16,
   },
 };
