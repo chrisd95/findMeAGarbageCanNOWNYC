@@ -14,6 +14,10 @@ let garbageOptions = [
   "green-waste-img",
   "construction-waste-img",
 ];
+
+let garbageOptionsInfo = [
+  "The word “waste” generally refers to any material, non-hazardous or hazardous, that has no further use, and which is managed at recycling, processing, or disposal sites. Municipal solid waste (MSW) refers to recyclables and compostable materials, as well as garbage from homes, businesses, institutions, and construction and demolition sites.",
+];
 let currentGarbageType = garbageOptions[0];
 document.getElementById(currentGarbageType).style.opacity = 1;
 var dataObjPolygonArray = [];

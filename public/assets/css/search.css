@@ -201,6 +201,31 @@ table {
   animation-name: bounce;
   animation-duration: 5s;
 }
+#waste-info {
+  background: black;
+  position: absolute;
+  z-index: 101;
+  opacity: 0.85;
+  filter: alpha(opacity=90);
+  color: #ffffff;
+  height: 30%;
+  top: 12%;
+  left: 5%;
+  width: 10%;
+  min-width: 250px;
+  min-height: 50px;
+  border-radius: 10px;
+  text-align: center;
+  display: flex;
+  flex-direction: column;
+  justify-content: space-around;
+  align-items: center;
+  font-size: 0.7em;
+}
+#waste-info-title {
+  font-size: 1.2em;
+  font-weight: 700;
+}
 
 #garbage {
   /* background-color: yellow; */
