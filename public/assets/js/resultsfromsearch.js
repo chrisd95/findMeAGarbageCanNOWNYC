@@ -82,6 +82,7 @@ for (let i = 0; i < garbageOptions.length; i++) {
         "Source: " +
         garbageOptionsInfo[i][4] +
         "</a>";
+      play();
     });
 }
 
