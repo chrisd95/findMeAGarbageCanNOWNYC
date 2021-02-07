@@ -16,7 +16,48 @@ let garbageOptions = [
 ];
 
 let garbageOptionsInfo = [
-  "The word “waste” generally refers to any material, non-hazardous or hazardous, that has no further use, and which is managed at recycling, processing, or disposal sites. Municipal solid waste (MSW) refers to recyclables and compostable materials, as well as garbage from homes, businesses, institutions, and construction and demolition sites.",
+  [
+    "Municipal Solid Waste",
+    "Municipal solid waste (MSW) refers to recyclables and compostable materials, as well as garbage from homes, businesses, institutions, and construction and demolition sites.",
+    "https://i.ibb.co/FsggCN7/recycle-bin.png",
+    "https://www.canada.ca/en/environment-climate-change/services/managing-reducing-waste/municipal-solid/shared-responsibility.html",
+    "Source: Canadian Government",
+  ],
+  [
+    "Recyclable Materials",
+    "<div>Accepted Materials (Examples): Paper and Cardboard, Plastic (With the exception of no 6 plastic, Metal (cans, aluminum), Glass (Bottles, Containers)</div> <br/><div> Unacceptable Materials: Plastic no 6, Soiled Cardboard, Paint, Batteries, Mirrors, etc.</div>",
+    "https://i.ibb.co/xHF6npG/recycle-sign.png",
+    "http://ville.montreal.qc.ca/portal/page?_pageid=7237,75369725&_dad=portal&_schema=PORTAL",
+    "Ville de Montréal",
+  ],
+  [
+    "Food Waste",
+    "<div>Accepted Materials (Examples): Meat, Fish Bones, Fruit Scraps, Tissue Paper</div> <br/> <div>Unacceptable Materials (Examples): Cigarettes, Burnt Candles, Diapers, Batteries </div>",
+    "https://i.ibb.co/cLW2D9y/bone.png",
+    "https://ville.montreal.qc.ca/portal/page?_pageid=7237,75371890&_dad=portal&_schema=PORTAL#matieres_acceptees",
+    "Ville de Montréal",
+  ],
+  [
+    "Organic Matter Waste",
+    "<div>Accepted Materials (Examples): Raw Food, Soiled Paper and Cardboard, Green Waste</div> <br/> <div>Unacceptable Materials (Examples): Recyclable Materials, Rocks, Sand, Construction Materials, Oils, etc. </div>",
+    "https://i.ibb.co/KWnD9Jq/plant-root.png",
+    "https://montreal.ca/collectes/collecte-des-matieres-organiques?arrondissement=Pierrefonds-Roxboro",
+    "Ville de Montréal",
+  ],
+  [
+    "Green Waste",
+    "<div> Accepted Materials (Examples): Gardening Waste, Tree, Tree Fruits, Grass Waste, Dead Leaves </div> <br/> <div>Must be stored in: Rigid Container with handles and without lids or Cardboard boxes or Special-Use Paper</div>",
+    "https://i.ibb.co/CnhqR1q/autumn-leaf.png",
+    "http://ville.montreal.qc.ca/portal/page?_pageid=7237,75371885&_dad=portal&_schema=PORTAL",
+    "Ville de Montréal",
+  ],
+  [
+    "Construction Waste",
+    "<div> Accepted Materials (Examples): Furniture, Appliances, Construction Waste, Demolition Waste, Renovation Waste</div> <br/> <div>There is a limit of 5m^3 per address accepted (Depends on borough) and a maximum of 25 kg (55lb) per box</div>",
+    "https://i.ibb.co/dJxwKbh/construction-excavator.png",
+    "https://montreal.ca/collectes/collecte-des-encombrants-et-residus-de-construction?arrondissement=Villeray%E2%80%93Saint-Michel%E2%80%93Parc-Extension",
+    "Ville de Montréal",
+  ],
 ];
 let currentGarbageType = garbageOptions[0];
 document.getElementById(currentGarbageType).style.opacity = 1;
@@ -28,6 +69,19 @@ for (let i = 0; i < garbageOptions.length; i++) {
     .addEventListener("click", function () {
       clearGarbage();
       document.getElementById(garbageOptions[i]).style.opacity = 1;
+      document.getElementById("waste-info").style.display = "flex";
+      document.getElementById("waste-info-img").src = garbageOptionsInfo[i][2];
+      document.getElementById("waste-info-title").innerHTML =
+        garbageOptionsInfo[i][0];
+      document.getElementById("waste-info-description").innerHTML =
+        garbageOptionsInfo[i][1];
+      document.getElementById("waste-info-source").innerHTML =
+        '<a href="' +
+        garbageOptionsInfo[i][3] +
+        '" target="_blank" >' +
+        "Source: " +
+        garbageOptionsInfo[i][4] +
+        "</a>";
     });
 }
 
@@ -72,7 +126,7 @@ function initMap() {
 
 let garbageImageArray = [
   '<div> <img id="garbage-img" style="width:30px" src="https://i.ibb.co/FsggCN7/recycle-bin.png" alt="cant see"/> Municipal Solid Waste </div> <br/>',
-  '<div> <img id="garbage-img" style="width:30px" src="https://i.ibb.co/xHF6npG/recycle-sign.png" alt="cant see"/> Recycling </div> <br/>',
+  '<div> <img id="garbage-img" style="width:30px" src="https://i.ibb.co/xHF6npG/recycle-sign.png" alt="cant see"/> Recyclable Materials </div> <br/>',
   '<div> <img id="garbage-img" style="width:30px" src="https://i.ibb.co/cLW2D9y/bone.png" alt="cant see"/> Food waste </div> <br/>',
   '<div> <img id="garbage-img" style="width:30px" src="https://i.ibb.co/KWnD9Jq/plant-root.png" alt="cant see"/> Organic Matter </div> <br/>',
   '<div> <img id="garbage-img" style="width:30px" src="https://i.ibb.co/CnhqR1q/autumn-leaf.png" alt="cant see"/> Green Waste </div> <br/>',
@@ -271,7 +325,6 @@ function createPolygons(dataObj, color1, color2, garbageImage) {
 
   for (i = 0; i < arrayLatLngObjs.length; i++) {
     let coordinates = arrayLatLngObjs[i][0];
-    console.log(arrayLatLngObjs[i][1]);
     dataObjPolygonArray[i] = new google.maps.Polygon({
       paths: coordinates,
       strokeColor: color1,
@@ -294,7 +347,9 @@ function createPolygons(dataObj, color1, color2, garbageImage) {
         document.getElementById("borough-container").innerText =
           this.name + this.zone;
         document.getElementById("info-collect-container").innerHTML =
-          garbageImage + this.msgFR;
+          `<div id="info-collect-container-mini">WHEN</div>` +
+          garbageImage +
+          this.msgFR;
         document.getElementById("borough-container-right").innerText =
           this.name + this.zone;
       }

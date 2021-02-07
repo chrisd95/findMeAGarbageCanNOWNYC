@@ -213,7 +213,7 @@ table {
   left: 5%;
   width: 10%;
   min-width: 250px;
-  min-height: 50px;
+  min-height: 300px;
   border-radius: 10px;
   text-align: center;
   display: flex;
@@ -221,9 +221,21 @@ table {
   justify-content: space-around;
   align-items: center;
   font-size: 0.7em;
+  display: none;
+  padding: 1%;
+}
+
+#info-collect-container-mini {
+  font-size: 2em;
+  font-weight: 700;
 }
 #waste-info-title {
   font-size: 1.2em;
+  font-weight: 700;
+}
+
+#waste-info-what {
+  font-size: 2em;
   font-weight: 700;
 }
 
