@@ -58,7 +58,7 @@ function initMap() {
             orduremenagere.features[i].geometry.coordinates[0][j]
           ),
           orduremenagere.features[i].properties.SECTEUR,
-          orduremenagere.features[i].properties.MESSAGE_FR,
+          orduremenagere.features[i].properties.MESSAGE_EN,
         ]);
       }
     }
@@ -68,13 +68,12 @@ function initMap() {
           orduremenagere.features[i].geometry.coordinates[0]
         ),
         orduremenagere.features[i].properties.SECTEUR,
-        orduremenagere.features[i].properties.MESSAGE_FR,
+        orduremenagere.features[i].properties.MESSAGE_EN,
       ]);
     }
   }
-  var infowindowInitialMessage = new google.maps.InfoWindow({
-    size: new google.maps.Size(500, 500),
-  });
+
+  console.log(recyclage);
 
   var infowindow = new google.maps.InfoWindow({
     size: new google.maps.Size(150, 50),
@@ -99,10 +98,6 @@ function initMap() {
     });
 
     message = arrayLatLngObjs[i][1];
-    // orduremenagerePolygonArray[i].infoWindow = new google.maps.InfoWindow({
-    //   size: new google.maps.Size(150, 50),
-    // });
-
     google.maps.event.addListener(
       orduremenagerePolygonArray[i],
       "mouseover",
