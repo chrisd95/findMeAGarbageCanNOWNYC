@@ -38,10 +38,10 @@ document.getElementById("close-button").addEventListener("click", function () {
   map.setZoom(12);
   setTimeout(() => {
     document.getElementById("yellow-arrow").style.display = "flex";
-  }, 1000);
+  }, 2000);
   setTimeout(() => {
     document.getElementById("yellow-arrow").style.display = "none";
-  }, 6000);
+  }, 7000);
 });
 
 // Map is initially centered to North America coordinates
