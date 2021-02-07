@@ -41,95 +41,13 @@ table {
   width: 80vw;
 }
 
-#street-view {
-  position: absolute;
-  top: 10px;
-  left: 10px;
-  z-index: 99;
-}
-#listing {
-  position: absolute;
-  width: 0vw;
-  height: 100vh;
-  font-weight: 700;
-  overflow: auto;
-  left: 80vw;
-  top: 0px;
-  cursor: pointer;
-  overflow-x: hidden;
-}
-
-#findhotels {
-  font-size: 14px;
-}
-
-#locationField {
-  -webkit-box-flex: 1 1 190px;
-  -ms-flex: 1 1 190px;
-  flex: 1 1 190px;
-  margin: 0 8px;
-}
-
-#controls {
-  -webkit-box-flex: 1 1 140px;
-  -ms-flex: 1 1 140px;
-  flex: 1 1 140px;
-}
-
-#autocomplete {
-  width: 100%;
-}
-
-#country {
-  width: 100%;
-}
-
-.placeIcon {
-  width: 20px;
-  height: 34px;
-  margin: 4px;
-}
-
-.hotelIcon {
-  width: 24px;
-  height: 24px;
-}
-
-#resultsTable {
-  border-collapse: collapse;
-  width: 20vw;
-}
-
-#rating {
-  font-size: 13px;
-  font-family: Arial Unicode MS;
-}
-
-.iw_table_row {
-  height: 18px;
-}
-
-.iw_attribute_name {
-  font-weight: bold;
-  text-align: right;
-}
-
-.iw_table_icon {
-  text-align: right;
-}
-
-.address-text {
-  font-size: 2em;
-  text-align: center;
-}
-
 #borough-container {
   background: transparent;
   position: absolute;
   z-index: 99;
   width: 30%;
   font-size: 2em;
-  height: 400px;
+  height: auto;
   opacity: 0.9;
   filter: alpha(opacity=90);
   color: white;
@@ -141,12 +59,34 @@ table {
   display: flex;
   justify-content: center;
   align-items: center;
+  pointer-events: none;
+}
+
+#borough-container-right {
+  background: transparent;
+  position: absolute;
+  z-index: 99;
+  width: 30%;
+  font-size: 2em;
+  height: auto;
+  opacity: 0.9;
+  filter: alpha(opacity=90);
+  color: white;
+  font-weight: 700;
+  height: 10%;
+  top: 5%;
+  left: 30%;
+  text-align: center;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  pointer-events: none;
 }
 
 #info-collect-container {
   background: #000000;
   position: absolute;
-  z-index: 99;
+  z-index: 101;
   width: 20%;
   top: 0;
   opacity: 0.9;
@@ -155,9 +95,47 @@ table {
   height: 100vh;
   top: 0%;
   left: 80%;
-  text-align: center;
+  text-align: left;
   display: flex;
   justify-content: center;
   align-items: center;
   padding: 4%;
+}
+
+#on-load-message {
+  background: black;
+  position: absolute;
+  z-index: 100;
+  width: 40%;
+  top: 0;
+  opacity: 0.85;
+  filter: alpha(opacity=90);
+  color: #ffffff;
+  height: 65%;
+  top: 15%;
+  left: 20%;
+  border-radius: 10px;
+  text-align: center;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  padding: 4%;
+  font-size: 2em;
+}
+#onload-message-welcome {
+  font-size: 0.6em;
+}
+
+#close-button {
+  position: absolute;
+  right: 5%;
+  top: 5%;
+  cursor: pointer;
+}
+
+#on-load-message-data {
+  font-size: 0.4em;
+  position: absolute;
+  bottom: 5%;
 }

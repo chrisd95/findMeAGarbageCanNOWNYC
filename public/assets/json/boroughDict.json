@@ -1,5 +1,5 @@
 var boroughDict = {
-"IBZ":{"quartier":"L'Île-Bizard-Sainte-Geneviève"}  ,
+"IBZ":{"quartier":"L'Île-Bizard-Sainte-Geneviève","Secteur": ""}  ,
 "VRD-1":{"quartier":"Verdun", "Secteur": " 1"},
 "VRD-2":{"quartier":"Verdun", "Secteur": " 2"},
 "VRD-3":{"quartier":"Verdun", "Secteur": " 3"},
@@ -117,7 +117,7 @@ var boroughDict = {
 "LSL4":{"quartier":"LaSalle", "Secteur": " 4"},
 "LCH-1":{"quartier":"Lachine", "Secteur": " 1"},
 "LCH-2-OM":{"quartier":"Lachine", "Secteur": " 2-OM"},
-"OUT":{"quartier":"Outremont"},
+"OUT":{"quartier":"Outremont","Secteur": ""},
 "PFDROX-1":{"quartier":"Pierrefonds-Roxboro", "Secteur": " 01"},
 "PFDROX-2":{"quartier":"Pierrefonds-Roxboro", "Secteur": " 02"},
 "PFDROX-3":{"quartier":"Pierrefonds-Roxboro", "Secteur": " 03"},

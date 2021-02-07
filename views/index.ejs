@@ -1,7 +1,7 @@
 <!DOCTYPE html>
 <html>
   <head>
-    <title>FIND THE CLOSEST GARBAGE CAN NYC</title>
+    <title>When can I Trash?</title>
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
     <script src="https://polyfill.io/v3/polyfill.min.js?features=default"></script>
     <link rel="preconnect" href="https://fonts.gstatic.com" />
@@ -28,8 +28,11 @@
       crossorigin="anonymous"
     />
     <link rel="stylesheet" href="assets/css/search.css" />
+    <link
+      rel="stylesheet"
+      href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css"
+    />
   </head>
-  <script></script>
   <body>
     <results-container>
       <div id="map"></div>
@@ -38,35 +41,40 @@
           <tbody id="results"></tbody>
         </table>
       </div>
+      <div id="on-load-message">
+        <div id="onload-message-welcome">Welcome to</div>
+        <div id="on-load-message-title">When Can I Trash?</div>
+        <div id="on-load-message-data">
+          Data is taken from
+          <a
+            href="https://donnees.montreal.ca/ville-de-montreal/info-collectes"
+            target="_blank"
+            >Secteurs Info-Collectes</a
+          >
+          <div>under the Licence Creative Commons CC-BY 4.0.</div>
+          <br />
+          <div>
+            Created by Christopher Dip for
+            <a href="https://hackatown-2021.devpost.com/" target="_blank"
+              >PolyHx Hackatown 2021</a
+            >
+          </div>
+          <br />
+          <a href="https://github.com/chrisd95" target="_blank"
+            ><i style="font-size: 24px" class="fa">&#xf09b;</i></a
+          >
+          <a
+            href="https://www.linkedin.com/in/christopher-dip-7436921bb/"
+            target="_blank"
+            ><i style="font-size: 24px" class="fa">&#xf0e1;</i></a
+          >
+        </div>
+        <div id="close-button">&#10006;</div>
+      </div>
       <div id="borough-container"></div>
+      <div id="borough-container-right"></div>
       <div id="info-collect-container"></div>
     </results-container>
-    <div style="display: none">
-      <div id="info-content">
-        <table>
-          <tr id="iw-url-row" class="iw_table_row">
-            <td id="iw-icon" class="iw_table_icon"></td>
-            <td id="iw-url"></td>
-          </tr>
-          <tr id="iw-address-row" class="iw_table_row">
-            <td class="iw_attribute_name">Address:</td>
-            <td id="iw-address"></td>
-          </tr>
-          <tr id="iw-phone-row" class="iw_table_row">
-            <td class="iw_attribute_name">Telephone:</td>
-            <td id="iw-phone"></td>
-          </tr>
-          <tr id="iw-rating-row" class="iw_table_row">
-            <td class="iw_attribute_name">Rating:</td>
-            <td id="iw-rating"></td>
-          </tr>
-          <tr id="iw-website-row" class="iw_table_row">
-            <td class="iw_attribute_name">Website:</td>
-            <td id="iw-website"></td>
-          </tr>
-        </table>
-      </div>
-    </div>
   </body>
 </html>
 

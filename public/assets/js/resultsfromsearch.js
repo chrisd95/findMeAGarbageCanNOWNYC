@@ -6,20 +6,22 @@ let autocomplete;
 let placeTwo;
 let searchImage;
 const countryRestrict = { country: "us" };
-const MARKER_PATH =
-  "https://developers.google.com/maps/documentation/javascript/images/marker_green";
 
-const hostnameRegexp = new RegExp("^https?://.+?/");
+// close X-button
+document.getElementById("close-button").addEventListener("click", function () {
+  console.log("closing");
+  document.getElementById("on-load-message").style.display = "none";
+  map.setZoom(12);
+});
 
 // Map is initially centered to North America coordinates
 const countries = {
   address: {
     // Initial coordinates of the map
-    center: { lat: 45.59, lng: -73.7 },
-    zoom: 11,
+    center: { lat: 45.5, lng: -73.65 },
+    zoom: 16,
   },
 };
-
 // Initialize google map API
 function initMap() {
   map = new google.maps.Map(document.getElementById("map"), {
@@ -70,6 +72,9 @@ function initMap() {
       ]);
     }
   }
+  var infowindowInitialMessage = new google.maps.InfoWindow({
+    size: new google.maps.Size(500, 500),
+  });
 
   var infowindow = new google.maps.InfoWindow({
     size: new google.maps.Size(150, 50),
@@ -86,6 +91,7 @@ function initMap() {
       fillOpacity: 0.35,
       clickable: true,
       name: boroughDict[arrayLatLngObjs[i][1]].quartier,
+      zone: boroughDict[arrayLatLngObjs[i][1]].Secteur,
       msgFR: arrayLatLngObjs[i][2],
     });
     google.maps.event.addListener(map, "click", function () {
@@ -93,66 +99,45 @@ function initMap() {
     });
 
     message = arrayLatLngObjs[i][1];
-    orduremenagerePolygonArray[i].infoWindow = new google.maps.InfoWindow({
-      size: new google.maps.Size(150, 50),
-    });
+    // orduremenagerePolygonArray[i].infoWindow = new google.maps.InfoWindow({
+    //   size: new google.maps.Size(150, 50),
+    // });
 
     google.maps.event.addListener(
       orduremenagerePolygonArray[i],
       "mouseover",
       function () {
         this.setOptions({ fillColor: "#00FF00" });
-        document.getElementById("borough-container").innerText = this.name;
-        document.getElementById(
-          "info-collect-container"
-        ).innerText = this.msgFR;
+        document.getElementById("borough-container").innerText =
+          this.name + this.zone;
+        document.getElementById("info-collect-container").innerText =
+          this.msgFR + this.name + this.zone;
+        document.getElementById("borough-container-right").innerText =
+          this.name + this.zone;
       }
     );
-
     google.maps.event.addListener(
       orduremenagerePolygonArray[i],
       "mouseout",
       function () {
         this.setOptions({ fillColor: "#FF0000" });
-        document.getElementById("borough-container").innerText = "";
+        document.getElementById("borough-container").innerText = "  ";
+        document.getElementById("borough-container-right").innerText = "  ";
         document.getElementById("info-collect-container").innerText = "";
       }
     );
-
-    google.maps.event.addListener(
-      orduremenagerePolygonArray[i],
-      "click",
-      function (event) {
-        infowindow.setContent(message);
-        if (event) {
-          point = event.latLng;
-        }
-        infowindow.setPosition(point);
-        infowindow.open(map);
-      }
-    );
-
+    // google.maps.event.addListener(
+    //   orduremenagerePolygonArray[i],
+    //   "click",
+    //   function (event) {
+    //     infowindow.setContent(message);
+    //     if (event) {
+    //       point = event.latLng;
+    //     }
+    //     infowindow.setPosition(point);
+    //     infowindow.open(map);
+    //   }
+    // );
     orduremenagerePolygonArray[i].setMap(map);
-  }
-
-  //Find Garbage NYC
-  // For loop of all recycling bins
-  const icons = "https://i.ibb.co/wL4prx4/delete.png";
-
-  for (i = 0; i < recyclingbin.length; i++) {
-    latVal = recyclingbin[i].Latitude;
-    lngVal = recyclingbin[i].Longitude;
-    latlng = { lat: latVal, lng: lngVal };
-    new google.maps.Marker({
-      position: latlng,
-      map,
-      title: "Recycle Bin #" + i,
-      clickable: true,
-      icon: icons,
-    });
-
-    // Add feature to say that garbage is full
-
-    // Add localizing feature
   }
 }
