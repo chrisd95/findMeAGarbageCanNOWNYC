@@ -149,7 +149,7 @@ table {
   height: 5%;
   bottom: 5%;
   left: 5%;
-  width: 10%;
+  width: 15%;
   border-radius: 10px;
   text-align: center;
   display: flex;
@@ -160,21 +160,28 @@ table {
 
 #garbage {
   /* background-color: yellow; */
-  width: 25%;
+  width: 16%;
 }
 
 #recycling {
   /* background-color: green; */
-  width: 25%;
+  width: 16%;
 }
 
 #compost {
   /* background-color: blue; */
-  width: 25%;
+  width: 16%;
 }
 #organic-waste {
   /* background-color: blue; */
-  width: 25%;
+  width: 16%;
+}
+
+#green-waste {
+  width: 16%;
+}
+#construction-waste {
+  width: 16%;
 }
 #garbage-picker img {
   opacity: 0.2;

@@ -11,6 +11,8 @@ let garbageOptions = [
   "recycling-img",
   "compost-img",
   "organic-waste-img",
+  "green-waste-img",
+  "construction-waste-img",
 ];
 let currentGarbageType = garbageOptions[0];
 document.getElementById(currentGarbageType).style.opacity = 1;
@@ -63,9 +65,13 @@ let garbageImageArray = [
   '<div> <img id="garbage-img" style="width:30px" src="https://i.ibb.co/xHF6npG/recycle-sign.png" alt="cant see"/> Recycling </div> <br/>',
   '<div> <img id="garbage-img" style="width:30px" src="https://i.ibb.co/cLW2D9y/bone.png" alt="cant see"/> Food waste </div> <br/>',
   '<div> <img id="garbage-img" style="width:30px" src="https://i.ibb.co/KWnD9Jq/plant-root.png" alt="cant see"/> Organic Matter </div> <br/>',
+  '<div> <img id="garbage-img" style="width:30px" src="https://i.ibb.co/CnhqR1q/autumn-leaf.png" alt="cant see"/> Green Waste </div> <br/>',
+  '<div> <img id="garbage-img" style="width:30px" src="https://i.ibb.co/dJxwKbh/construction-excavator.png" alt="cant see"/> Construction Waste </div> <br/>',
 ];
 
 let garbageColorArray = [
+  ["#FF0000", "#00FF00"],
+  ["#FF0000", "#00FF00"],
   ["#FF0000", "#00FF00"],
   ["#FF0000", "#00FF00"],
   ["#FF0000", "#00FF00"],
@@ -100,6 +106,7 @@ document
       stateRecyclage = 0;
       stateCompost = 0;
       stateOrganicWaste = 0;
+      stateConstructionWaste = 0;
     }
   });
 
@@ -121,6 +128,8 @@ document
       stateRecyclage = 1;
       stateCompost = 0;
       stateOrganicWaste = 0;
+      stateGreenWaste = 0;
+      stateConstructionWaste = 0;
     }
   });
 
@@ -142,6 +151,8 @@ document
       stateRecyclage = 0;
       stateCompost = 1;
       stateOrganicWaste = 0;
+      stateGreenWaste = 0;
+      stateConstructionWaste = 0;
     }
   });
 
@@ -163,6 +174,54 @@ document
       stateRecyclage = 0;
       stateCompost = 0;
       stateOrganicWaste = 1;
+      stateGreenWaste = 0;
+      stateConstructionWaste = 0;
+    }
+  });
+
+let stateGreenWaste = 0;
+document
+  .getElementById(garbageOptions[4])
+  .addEventListener("click", function () {
+    if (stateGreenWaste == 0) {
+      for (let i = 0; i < dataObjPolygonArray.length; i++) {
+        dataObjPolygonArray[i].setMap(null);
+      }
+      createPolygons(
+        greenwaste,
+        garbageColorArray[4][0],
+        garbageColorArray[4][1],
+        garbageImageArray[4]
+      );
+      stateOrdure = 0;
+      stateRecyclage = 0;
+      stateCompost = 0;
+      stateOrganicWaste = 0;
+      stateGreenWaste = 1;
+      stateConstructionWaste = 0;
+    }
+  });
+
+let stateConstructionWaste = 0;
+document
+  .getElementById(garbageOptions[5])
+  .addEventListener("click", function () {
+    if (stateConstructionWaste == 0) {
+      for (let i = 0; i < dataObjPolygonArray.length; i++) {
+        dataObjPolygonArray[i].setMap(null);
+      }
+      createPolygons(
+        constructionwaste,
+        garbageColorArray[5][0],
+        garbageColorArray[5][1],
+        garbageImageArray[5]
+      );
+      stateOrdure = 0;
+      stateRecyclage = 0;
+      stateCompost = 0;
+      stateOrganicWaste = 0;
+      stateGreenWaste = 0;
+      stateConstructionWaste = 1;
     }
   });
 
