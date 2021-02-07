@@ -139,3 +139,23 @@ table {
   position: absolute;
   bottom: 5%;
 }
+
+#garbage-picker {
+  background: red;
+  position: absolute;
+  z-index: 101;
+  opacity: 0.85;
+  filter: alpha(opacity=90);
+  color: #ffffff;
+  height: 2.5%;
+  bottom: 5%;
+  left: 5%;
+  width: 10%;
+  border-radius: 10px;
+  text-align: center;
+  display: flex;
+  flex-direction: row;
+  justify-content: space-between;
+  align-items: center;
+  padding: 2%;
+}
