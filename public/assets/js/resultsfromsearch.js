@@ -6,7 +6,12 @@ let autocomplete;
 let placeTwo;
 let searchImage;
 const countryRestrict = { country: "us" };
-let garbageOptions = ["garbage-img", "recycling-img", "compost-img"];
+let garbageOptions = [
+  "garbage-img",
+  "recycling-img",
+  "compost-img",
+  "organic-waste-img",
+];
 let currentGarbageType = garbageOptions[0];
 document.getElementById(currentGarbageType).style.opacity = 1;
 var dataObjPolygonArray = [];
@@ -54,17 +59,30 @@ function initMap() {
 }
 
 let garbageImageArray = [
-  '<img id="garbage-img" style="width:30px" src="https://i.ibb.co/FsggCN7/recycle-bin.png" alt="cant see"/>',
-  '<img id="garbage-img" style="width:30px" src="https://i.ibb.co/xHF6npG/recycle-sign.png" alt="cant see"/>',
-  '<img id="garbage-img" style="width:30px" src="https://i.ibb.co/cLW2D9y/bone.png" alt="cant see"/>',
+  '<div> <img id="garbage-img" style="width:30px" src="https://i.ibb.co/FsggCN7/recycle-bin.png" alt="cant see"/> Municipal Solid Waste </div> <br/>',
+  '<div> <img id="garbage-img" style="width:30px" src="https://i.ibb.co/xHF6npG/recycle-sign.png" alt="cant see"/> Recycling </div> <br/>',
+  '<div> <img id="garbage-img" style="width:30px" src="https://i.ibb.co/cLW2D9y/bone.png" alt="cant see"/> Food waste </div> <br/>',
+  '<div> <img id="garbage-img" style="width:30px" src="https://i.ibb.co/KWnD9Jq/plant-root.png" alt="cant see"/> Organic Matter </div> <br/>',
 ];
 
 let garbageColorArray = [
   ["#FF0000", "#00FF00"],
   ["#FF0000", "#00FF00"],
   ["#FF0000", "#00FF00"],
+  ["#FF0000", "#00FF00"],
 ];
-let stateOrdure = 0;
+
+let stateOrdure = 1;
+
+setTimeout(() => {
+  createPolygons(
+    orduremenagere,
+    garbageColorArray[0][0],
+    garbageColorArray[0][1],
+    garbageImageArray[0]
+  );
+}, 250);
+
 document
   .getElementById(garbageOptions[0])
   .addEventListener("click", function () {
@@ -81,6 +99,7 @@ document
       stateOrdure = 1;
       stateRecyclage = 0;
       stateCompost = 0;
+      stateOrganicWaste = 0;
     }
   });
 
@@ -101,6 +120,7 @@ document
       stateOrdure = 0;
       stateRecyclage = 1;
       stateCompost = 0;
+      stateOrganicWaste = 0;
     }
   });
 
@@ -121,6 +141,28 @@ document
       stateOrdure = 0;
       stateRecyclage = 0;
       stateCompost = 1;
+      stateOrganicWaste = 0;
+    }
+  });
+
+let stateOrganicWaste = 0;
+document
+  .getElementById(garbageOptions[3])
+  .addEventListener("click", function () {
+    if (stateOrganicWaste == 0) {
+      for (let i = 0; i < dataObjPolygonArray.length; i++) {
+        dataObjPolygonArray[i].setMap(null);
+      }
+      createPolygons(
+        organicwaste,
+        garbageColorArray[3][0],
+        garbageColorArray[3][1],
+        garbageImageArray[3]
+      );
+      stateOrdure = 0;
+      stateRecyclage = 0;
+      stateCompost = 0;
+      stateOrganicWaste = 1;
     }
   });
 
@@ -160,7 +202,7 @@ function createPolygons(dataObj, color1, color2, garbageImage) {
 
   for (i = 0; i < arrayLatLngObjs.length; i++) {
     let coordinates = arrayLatLngObjs[i][0];
-    console.log(arrayLatLngObjs[i]);
+    console.log(arrayLatLngObjs[i][1]);
     dataObjPolygonArray[i] = new google.maps.Polygon({
       paths: coordinates,
       strokeColor: color1,

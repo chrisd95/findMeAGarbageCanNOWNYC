@@ -100,7 +100,7 @@ table {
   flex-direction: column;
   justify-content: center;
   align-items: center;
-  padding: 4%;
+  padding: 2%;
 }
 
 #on-load-message {
@@ -160,17 +160,21 @@ table {
 
 #garbage {
   /* background-color: yellow; */
-  width: 33%;
+  width: 25%;
 }
 
 #recycling {
   /* background-color: green; */
-  width: 33%;
+  width: 25%;
 }
 
 #compost {
   /* background-color: blue; */
-  width: 33%;
+  width: 25%;
+}
+#organic-waste {
+  /* background-color: blue; */
+  width: 25%;
 }
 #garbage-picker img {
   opacity: 0.2;
