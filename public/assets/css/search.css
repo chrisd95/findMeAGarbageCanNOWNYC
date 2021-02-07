@@ -160,6 +160,24 @@ table {
   align-items: center;
 }
 
+@keyframes bounce {
+  0% {
+    bottom: 12%;
+  }
+  25% {
+    bottom: 16%;
+  }
+  50% {
+    bottom: 12%;
+  }
+  75% {
+    bottom: 16%;
+  }
+  100% {
+    bottom: 12%;
+  }
+}
+
 #yellow-arrow {
   background: transparent;
   position: absolute;
@@ -180,6 +198,8 @@ table {
   justify-content: flex-end;
   align-items: center;
   display: none;
+  animation-name: bounce;
+  animation-duration: 5s;
 }
 
 #garbage {
