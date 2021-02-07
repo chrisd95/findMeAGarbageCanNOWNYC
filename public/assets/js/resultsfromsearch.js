@@ -349,14 +349,14 @@ function createPolygons(dataObj, color1, color2, garbageImage) {
       "mouseover",
       function () {
         this.setOptions({ fillColor: color2 });
-        document.getElementById("borough-container").innerText =
-          this.name + this.zone;
+        document.getElementById("borough-container").innerHTML =
+          "WHERE <br>" + this.name + this.zone;
         document.getElementById("info-collect-container").innerHTML =
           `<div id="info-collect-container-mini">WHEN</div>` +
           garbageImage +
           this.msgFR;
-        document.getElementById("borough-container-right").innerText =
-          this.name + this.zone;
+        document.getElementById("borough-container-right").innerHTML =
+          "WHERE <br>" + this.name + this.zone;
         play();
       }
     );
