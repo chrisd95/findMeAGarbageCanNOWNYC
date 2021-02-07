@@ -201,6 +201,24 @@ table {
   animation-name: bounce;
   animation-duration: 5s;
 }
+@keyframes bouncetwo {
+  0% {
+    top: 12%;
+  }
+  25% {
+    top: 14%;
+  }
+  50% {
+    top: 12%;
+  }
+  75% {
+    top: 14%;
+  }
+  100% {
+    top: 12%;
+  }
+}
+
 #waste-info {
   background: black;
   position: absolute;
@@ -223,6 +241,7 @@ table {
   font-size: 0.7em;
   display: none;
   padding: 1%;
+  animation: bouncetwo 5s infinite;
 }
 
 #info-collect-container-mini {
@@ -264,6 +283,7 @@ table {
 #construction-waste {
   width: 14%;
 }
+
 #garbage-picker img {
   opacity: 0.2;
 }

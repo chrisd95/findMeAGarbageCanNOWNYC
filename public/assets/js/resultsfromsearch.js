@@ -289,6 +289,11 @@ document
     }
   });
 
+function play() {
+  var audio = document.getElementById("audio");
+  audio.play();
+}
+
 function convertToArrayOfLatLng(myArray) {
   let newArray = [];
   for (j = 0; j < myArray.length; j++) {
@@ -352,6 +357,7 @@ function createPolygons(dataObj, color1, color2, garbageImage) {
           this.msgFR;
         document.getElementById("borough-container-right").innerText =
           this.name + this.zone;
+        play();
       }
     );
     google.maps.event.addListener(
